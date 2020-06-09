@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import { message } from 'antd'
 
 // 添加请求拦截器, 请求发送之前
 // 让post请求的请求体格式为urlencoded格式
@@ -24,6 +25,7 @@ axios.interceptors.response.use(
 	},
 	function (error) {
 		// 返回一个pending状态的promise, 中断promise链
+		message.error('请求出错 ', error)
 		return new Promise(() => {})
 
 		// return Promise.reject(error)
