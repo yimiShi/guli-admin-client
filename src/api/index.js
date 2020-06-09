@@ -27,13 +27,13 @@ export const reqLogin = (username, password) =>
 // 	})
 // }
 
-const name = 'tom'
-const pwd = '123'
-reqLogin(name, pwd).then(
-	(response) => {
-		console.log('success', response)
-	},
-	(err) => {
-		console.log('error', err)
-	}
-)
+// const name = 'tom'
+// const pwd = '123'
+// reqLogin(name, pwd).then(
+// 	(response) => {
+// 		console.log('success', response)
+// 	},
+// 	(err) => {
+// 		console.log('error', err)
+// 	}
+// )

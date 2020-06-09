@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button } from 'antd'
+import { Redirect } from 'react-router-dom'
+import { Form, Icon, Input, Button, message } from 'antd'
 
+import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from '../../utils/storageUtils'
+import { reqLogin } from '../../api'
 import logo from './images/logo.png'
 import './login.css'
 
@@ -15,9 +19,25 @@ class Login extends Component {
 		// const password = form.getFieldValue('password')
 		// console.log(values, username, password)
 
-		this.props.form.validateFields((err, { username, password }) => {
+		this.props.form.validateFields(async (err, { username, password }) => {
 			if (!err) {
-				alert(`发送登录的ajax请求, username=${username}, password=${password}`)
+				// alert(`发送登录的ajax请求, username=${username}, password=${password}`)
+				const result = await reqLogin(username, password)
+				// 登录成功和失败处理
+				if (result.status === 0) {
+					// 将user信息保存到localstorage中
+					const user = result.data
+					// 保存到local中
+					storageUtils.saveToLocal('user_key', user)
+					// 保存到内存中
+					memoryUtils.user = user
+
+					// 跳到管理页面
+					this.props.history.replace('/')
+					message.success('登录成功')
+				} else {
+					message.error(result.msg)
+				}
 			} else {
 				alert('验证失败')
 			}
@@ -40,6 +60,10 @@ class Login extends Component {
 	}
 
 	render() {
+		const user = memoryUtils.user
+		if (user._id) {
+			return <Redirect to="/" />
+		}
 		const Item = Form.Item
 		const { getFieldDecorator } = this.props.form
 
