@@ -5,7 +5,7 @@ import { Form, Icon, Input, Button, message } from 'antd'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
 import { reqLogin } from '../../api'
-import logo from './images/logo.png'
+import logo from '../../assets/images/logo.png'
 import './login.css'
 
 class Login extends Component {
@@ -60,8 +60,11 @@ class Login extends Component {
 	}
 
 	render() {
+		// const user = memoryUtils.user._id ? memoryUtils.user : storageUtils.getFromLocal('user_key')
 		const user = memoryUtils.user
 		if (user._id) {
+			console.log(444, memoryUtils.user)
+
 			return <Redirect to="/" />
 		}
 		const Item = Form.Item
