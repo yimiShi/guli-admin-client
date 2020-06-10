@@ -23,9 +23,10 @@ export default class Category extends Component {
 			{
 				title: '操作',
 				width: 300,
-				render: () => (
+				render: (category) => (
 					<LinkButton
 						onClick={() => {
+							this.category = category
 							this.setState({ showStatus: 2 })
 						}}
 					>
@@ -60,18 +61,29 @@ export default class Category extends Component {
 
 		this.form.validateFields(async (err, values) => {
 			if (!err) {
+				this.form.resetFields() // 重置输入数据, 变成了初始值
 				const { categoryName } = values
-				// 添加分类请求
-				const result = await reqAddCategory(categoryName)
-				console.log(111, result)
+
+				const showStatus = this.state.showStatus
+
+				let result
+				if (showStatus === 1) {
+					// 添加分类请求
+					result = await reqAddCategory(categoryName)
+				} else {
+					// 修改分类
+					const categoryId = this.category._id
+					result = await reqUpdateCategory({ categoryId, categoryName })
+				}
 
 				this.setState({ showStatus: 0 })
+				const action = showStatus === 1 ? '添加' : '修改'
 				// 做不同的处理
 				if (result.status === 0) {
 					this.getCategorys()
-					message.success('添加成功')
+					message.success(action + '分类成功')
 				} else {
-					message.error('添加分类失败')
+					message.error(action + '分类失败')
 				}
 			}
 		})
@@ -83,6 +95,7 @@ export default class Category extends Component {
 	 * 点击取消的回调
 	 */
 	handleCancel = () => {
+		this.form.resetFields()
 		this.setState({ showStatus: 0 })
 	}
 
@@ -96,6 +109,10 @@ export default class Category extends Component {
 
 	render() {
 		const { categorys, loading, showStatus } = this.state
+
+		// 读取更新的分类名称
+		const category = this.category || {}
+
 		//card 右上角结构
 		const extra = (
 			<Button
@@ -125,7 +142,7 @@ export default class Category extends Component {
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}
 				>
-					<AddUpdateForm setForm={(form) => (this.form = form)} />
+					<AddUpdateForm setForm={(form) => (this.form = form)} categoryName={category.name} />
 				</Modal>
 			</Card>
 		)
