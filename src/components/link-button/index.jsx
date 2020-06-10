@@ -16,5 +16,5 @@ import './index.css'
  */
 export default function LinkButton(props) {
 	// return <button {...props}></button>
-	return <button {...props} />
+	return <button {...props} className="link-button" />
 }
