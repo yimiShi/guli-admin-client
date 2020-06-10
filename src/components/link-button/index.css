@@ -1,0 +1,7 @@
+.link-button {
+  border: none;
+  outline: none;
+  color: green;
+  background-color: transparent;
+  cursor: pointer;
+}
