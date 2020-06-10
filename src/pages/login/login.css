@@ -19,6 +19,7 @@
 .login .login-header h1 {
   font-size: 30px;
   color: #fff;
+  margin-bottom: 0;
 }
 .login .login-content {
   margin: 50px auto;
