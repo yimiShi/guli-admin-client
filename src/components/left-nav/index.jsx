@@ -81,10 +81,9 @@ class LeftNav extends Component {
 	}
 
 	render() {
-		console.log('render...left-nav')
-
 		// 当前的路由路径
 		let selectKey = this.props.location.pathname
+		console.log('left-nav', selectKey)
 
 		return (
 			<div className="left-nav">
@@ -94,6 +93,7 @@ class LeftNav extends Component {
 				</Link>
 
 				<Menu selectedKeys={[selectKey]} defaultOpenKeys={[this.openKey]} mode="inline" theme="dark">
+					{/* <Menu defaultSelectedKeys={[selectKey]} defaultOpenKeys={[this.openKey]} mode="inline" theme="dark"> */}
 					{this.menuNodes}
 					{/* <Menu.Item key="/home">
 						<Link to="/home">

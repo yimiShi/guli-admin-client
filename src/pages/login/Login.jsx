@@ -38,8 +38,6 @@ class Login extends Component {
 				} else {
 					message.error(result.msg)
 				}
-			} else {
-				alert('验证失败')
 			}
 		})
 	}
@@ -63,8 +61,6 @@ class Login extends Component {
 		// const user = memoryUtils.user._id ? memoryUtils.user : storageUtils.getFromLocal('user_key')
 		const user = memoryUtils.user
 		if (user._id) {
-			console.log(444, memoryUtils.user)
-
 			return <Redirect to="/" />
 		}
 		const Item = Form.Item

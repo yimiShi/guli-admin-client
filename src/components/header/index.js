@@ -83,9 +83,7 @@ class Header extends Component {
 				<div className="header-top">
 					欢迎, {user.username}
 					{/* <a href="jacascript:;" onClick={this.logout}>退出</a>*/}
-					<LinkButton className="link-button" onClick={this.logout}>
-						退出
-					</LinkButton>
+					<LinkButton onClick={this.logout}>退出</LinkButton>
 				</div>
 				<div className="header-bottom">
 					<div className="header-bottom-left">{this.getTitle()}</div>

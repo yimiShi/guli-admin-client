@@ -9,8 +9,8 @@ const BASE = 'http://localhost:3000'
  * @param {} username
  * @param {*} password
  */
-export const reqLogin = (username, password) =>
-	/* ajax({
+export const reqLogin = (username, password) => ajax.post(BASE + '/login', { username, password })
+/* ajax({
 		method: 'post',
 		url: BASE + '/login',
 		data: {
@@ -19,7 +19,6 @@ export const reqLogin = (username, password) =>
 		},
 		// data: qs.stringify({ username, password }),
   }) */
-	ajax.post(BASE + '/login', { username, password })
 
 // login
 // export function reqLogin(username, password) {
@@ -79,3 +78,41 @@ export const reqAddCategory = (categoryName) => ajax.post(BASE + '/manage/catego
 // 	ajax.post(BASE + '/manage/category/update', { categoryId, categoryName })
 export const reqUpdateCategory = ({ categoryId, categoryName }) =>
 	ajax.post(BASE + '/manage/category/update', { categoryId, categoryName })
+
+// 获取商品分页列表
+export const reqProducts = (pageNum, pageSize) =>
+	ajax.get(BASE + '/manage/product/list', {
+		// 包含所有query参数的对象
+		params: {
+			pageNum: pageNum,
+			pageSize: pageSize,
+		},
+	})
+
+/**
+ * 根据name/desc搜索产品分页列表
+ */
+export const reqSearchProducts = ({ pageNum, pageSize, searchName, searchType }) =>
+	ajax(BASE + '/manage/product/search', {
+		params: {
+			pageNum,
+			pageSize,
+			[searchType]: searchName,
+		},
+	})
+
+/** 商品上下架 */
+export const reqUpdateStatus = (productId, status) =>
+	ajax(BASE + '/manage/product/updateStatus', {
+		method: 'POST',
+		data: {
+			productId,
+			status,
+		},
+	})
+
+// export const reqUpdateStatus = (productId, status) =>
+// 	ajax.post(BASE + '/manage/product/updateStatus', {
+// 		productId,
+// 		status,
+// 	})

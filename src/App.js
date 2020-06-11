@@ -8,6 +8,7 @@ import Login from './pages/login/Login'
  */
 export default class App extends Component {
 	render() {
+		console.log('app.js')
 		return (
 			<HashRouter>
 				<Switch>

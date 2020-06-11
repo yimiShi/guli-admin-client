@@ -7,7 +7,7 @@ import Header from '../../components/header'
 import LeftNav from '../../components/left-nav'
 import Home from '../../pages/home/Home'
 import Category from '../../pages/category/category'
-import Product from '../../pages/product/product'
+import Product from '../../pages/product/home'
 import Role from '../../pages/role/role'
 import User from '../../pages/user/user'
 import Bar from '../../pages/charts/bar'
@@ -21,6 +21,7 @@ export default class Admin extends Component {
 		// 读取保存的user, 如果不存在, 直接跳到登录页面
 		// const user = storageUtils.getFromLocal('user_key')
 		const user = memoryUtils.user
+		console.log('admin.js')
 
 		if (!user._id) {
 			// this.props.history.replace('/login')
