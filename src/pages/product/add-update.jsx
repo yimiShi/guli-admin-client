@@ -12,6 +12,9 @@ class ProductAddUpdate extends Component {
 	state = {
 		categorys: [],
 	}
+
+	pwRef = React.createRef()
+
 	getCategorys = async () => {
 		const result = await reqCategorys()
 		if (result.status === 0) {
@@ -32,18 +35,17 @@ class ProductAddUpdate extends Component {
 	}
 
 	handleSubmit = (event) => {
-		console.log(111)
-
 		event.preventDefault()
 		this.props.form.validateFields(async (err, values) => {
-			console.log(err)
-
 			if (!err) {
 				const { name, desc, price, categoryId } = values
 				console.log('发送请求:', name, desc, price, categoryId)
+				const imgs = this.pwRef.current.getImgs()
+				console.log('imgs', imgs)
 			}
 		})
 	}
+
 	UNSAFE_componentWillMount() {
 		this.product = memoryUtils.product
 		this.isUpdate = !!this.product._id
@@ -113,7 +115,7 @@ class ProductAddUpdate extends Component {
 						)}
 					</Form.Item>
 					<Form.Item label="商品图片">
-						<PicturesWall />
+						<PicturesWall ref={this.pwRef} />
 					</Form.Item>
 					<Form.Item label="商品详情">
 						<div>商品详情组件</div>

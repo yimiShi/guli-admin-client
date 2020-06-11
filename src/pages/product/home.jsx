@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Select, Input, Button, Icon, Table, message } from 'antd'
+import throttle from 'lodash.throttle'
 
 import { reqProducts, reqSearchProducts, reqUpdateStatus } from '../../api/index'
 import LinkButton from '../../components/link-button'
@@ -19,7 +20,7 @@ export default class Product extends Component {
 		searchName: '',
 	}
 
-	updateStatus = async (productId, status) => {
+	updateStatus = throttle(async (productId, status) => {
 		status = status === 1 ? 2 : 1
 		const result = await reqUpdateStatus(productId, status)
 
@@ -27,7 +28,7 @@ export default class Product extends Component {
 			message.success('更新商品状态成功')
 			this.getProducts(this.pageNum)
 		}
-	}
+	}, 2000)
 
 	initColumns = () => {
 		this.columns = [
@@ -99,7 +100,7 @@ export default class Product extends Component {
 		const { searchName, searchType } = this.state
 
 		let result
-		if (!searchName) {
+		if (!this.isSearch) {
 			result = await reqProducts(pageNum, PAGE_SIZE)
 		} else {
 			result = await reqSearchProducts({ pageNum, pageSize: PAGE_SIZE, searchType, searchName })
@@ -139,7 +140,13 @@ export default class Product extends Component {
 					value={searchName}
 					onChange={(event) => this.setState({ searchName: event.target.value })}
 				/>
-				<Button type="primary" onClick={() => this.getProducts(1)}>
+				<Button
+					type="primary"
+					onClick={() => {
+						this.isSearch = true
+						this.getProducts(1)
+					}}
+				>
 					搜索
 				</Button>
 			</span>
