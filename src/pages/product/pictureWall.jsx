@@ -1,6 +1,9 @@
 import React from 'react'
 import { Upload, Icon, Modal, message } from 'antd'
+import PropTypes from 'prop-types'
+
 import { reqDeleteImg } from '../../api'
+import { BASE_IMG } from '../../utils/Constants'
 
 function getBase64(file) {
 	return new Promise((resolve, reject) => {
@@ -12,6 +15,10 @@ function getBase64(file) {
 }
 
 export default class PicturesWall extends React.Component {
+	static propTypes = {
+		imgs: PropTypes.array,
+	}
+
 	state = {
 		previewVisible: false,
 		previewImage: '',
@@ -59,8 +66,20 @@ export default class PicturesWall extends React.Component {
 				message.error('图片删除失败')
 			}
 		}
-
 		this.setState({ fileList })
+	}
+
+	componentWillMount() {
+		const imgs = this.props.imgs
+		if (imgs && imgs.length > 0) {
+			const fileList = imgs.map((img, index) => ({
+				uid: -index,
+				name: img,
+				status: 'done',
+				url: BASE_IMG + '/' + img,
+			}))
+			this.setState({ fileList })
+		}
 	}
 
 	render() {

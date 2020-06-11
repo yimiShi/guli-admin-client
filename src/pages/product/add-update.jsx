@@ -115,7 +115,7 @@ class ProductAddUpdate extends Component {
 						)}
 					</Form.Item>
 					<Form.Item label="商品图片">
-						<PicturesWall ref={this.pwRef} />
+						<PicturesWall ref={this.pwRef} imgs={product.imgs} />
 					</Form.Item>
 					<Form.Item label="商品详情">
 						<div>商品详情组件</div>
