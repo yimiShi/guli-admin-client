@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Icon, Button, Form, Input, Select } from 'antd'
 
+import PicturesWall from './pictureWall'
 import { reqCategorys } from '../../api'
 import LinkButton from '../../components/link-button'
 import memoryUtils from '../../utils/memoryUtils'
@@ -112,7 +113,7 @@ class ProductAddUpdate extends Component {
 						)}
 					</Form.Item>
 					<Form.Item label="商品图片">
-						<div>商品图片组件</div>
+						<PicturesWall />
 					</Form.Item>
 					<Form.Item label="商品详情">
 						<div>商品详情组件</div>
