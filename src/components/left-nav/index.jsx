@@ -49,7 +49,7 @@ class LeftNav extends Component {
 					</Menu.Item>
 				)
 			} else {
-				let cItem = item.children.find((cItem) => cItem.key === path)
+				let cItem = item.children.find((cItem) => path.indexOf(cItem.key) === 0)
 				if (cItem) {
 					this.openKey = item.key
 				}
@@ -83,6 +83,12 @@ class LeftNav extends Component {
 	render() {
 		// 当前的路由路径
 		let selectKey = this.props.location.pathname
+
+		// 多级路由时的颜色显示bug修复
+		if (selectKey.startsWith('/product')) {
+			selectKey = selectKey.split('/').slice(0, 2).join('/')
+		}
+
 		console.log('left-nav', selectKey)
 
 		return (
