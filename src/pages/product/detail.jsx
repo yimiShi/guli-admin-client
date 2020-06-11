@@ -43,33 +43,33 @@ export default class Detail extends Component {
 		return (
 			<Card title={title} className="detail">
 				<List>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">商品名称:</span>
 						<span>{product.name}</span>
 					</List.Item>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">商品描述:</span>
 						<span>{product.desc}</span>
 					</List.Item>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">商品价格:</span>
 						<span>{product.price}</span>
 					</List.Item>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">所属分类:</span>
 						<span>{categoryName}</span>
 					</List.Item>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">商品图片:</span>
 						<span>
 							{product.imgs.map((img, item) => {
-								return <img key={img} src={BASE_IMG + img} alt={img} />
+								return <img key={img} src={BASE_IMG + '/' + img} alt={img} className="imgShow" />
 							})}
 						</span>
 					</List.Item>
-					<List.Item>
+					<List.Item className="list-item">
 						<span className="detail-left">商品详情:</span>
-						<div dangerouslySetInnerHTML={{ __html: product.detail }}></div>
+						<div dangerouslySetInnerHTML={{ __html: product.detail }} className="detail-info"></div>
 					</List.Item>
 				</List>
 			</Card>

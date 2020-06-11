@@ -75,7 +75,15 @@ export default class Product extends Component {
 				title: '操作',
 				render: (product) => (
 					<span>
-						<LinkButton>详情</LinkButton>
+						<LinkButton
+							onClick={() => {
+								// 在内存中保存product
+								memoryUtils.product = product
+								this.props.history.push('/product/addUpdate')
+							}}
+						>
+							修改
+						</LinkButton>
 						<LinkButton
 							onClick={() => {
 								// 在内存中保存product
@@ -83,7 +91,7 @@ export default class Product extends Component {
 								this.props.history.push('/product/detail')
 							}}
 						>
-							修改
+							详情
 						</LinkButton>
 					</span>
 				),

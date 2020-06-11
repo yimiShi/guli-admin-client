@@ -3,3 +3,12 @@
   font-weight: bold;
   margin-right: 10px;
 }
+.detail .imgShow {
+  height: 100px;
+  margin-left: 10px;
+}
+.detail .detail-info img {
+  height: 100px !important;
+  float: right;
+  margin-left: 10px;
+}
