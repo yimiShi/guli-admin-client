@@ -118,6 +118,7 @@ export default class Category extends Component {
 			<Button
 				type="primary"
 				onClick={() => {
+					this.category = {}
 					this.setState({ showStatus: 1 })
 				}}
 			>

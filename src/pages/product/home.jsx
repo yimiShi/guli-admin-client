@@ -4,6 +4,7 @@ import { Card, Select, Input, Button, Icon, Table, message } from 'antd'
 import { reqProducts, reqSearchProducts, reqUpdateStatus } from '../../api/index'
 import LinkButton from '../../components/link-button'
 import { PAGE_SIZE } from '../../utils/Constants'
+import memoryUtils from '../../utils/memoryUtils'
 const Option = Select.Option
 
 /**
@@ -74,7 +75,15 @@ export default class Product extends Component {
 				render: (product) => (
 					<span>
 						<LinkButton>详情</LinkButton>
-						<LinkButton>修改</LinkButton>
+						<LinkButton
+							onClick={() => {
+								// 在内存中保存product
+								memoryUtils.product = product
+								this.props.history.push('/product/detail')
+							}}
+						>
+							修改
+						</LinkButton>
 					</span>
 				),
 			},
@@ -156,6 +165,7 @@ export default class Product extends Component {
 						defaultPageSize: PAGE_SIZE,
 						showQuickJumper: true,
 						onChange: this.getProducts,
+						current: this.pageNum,
 					}}
 				></Table>
 			</Card>
