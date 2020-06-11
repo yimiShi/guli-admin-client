@@ -146,7 +146,13 @@ export default class Product extends Component {
 		)
 
 		const extra = (
-			<Button type="primary">
+			<Button
+				type="primary"
+				onClick={() => {
+					memoryUtils.product = {}
+					this.props.history.push('/product/addUpdate')
+				}}
+			>
 				<Icon type="plus" />
 				添加商品
 			</Button>
